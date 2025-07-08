@@ -1,0 +1,113 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Ser",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#requests"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.ser",
+          "match": "\\b(if|else|while|yield|exit|request)\\b"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.ser",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.ser",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.numeric.ser",
+          "match": "\\b[0-9]+\\b"
+        },
+        {
+          "name": "constant.language.ser",
+          "match": "\\b(true|false|\\?)\\b"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.assignment.ser",
+          "match": ":="
+        },
+        {
+          "name": "keyword.operator.comparison.ser",
+          "match": "=="
+        },
+        {
+          "name": "keyword.operator.arithmetic.ser",
+          "match": "[+\\-*/]"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.global.ser",
+          "match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
+        },
+        {
+          "name": "variable.other.local.ser",
+          "match": "\\b[a-z][a-zA-Z0-9_]*\\b"
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.ser",
+          "match": "//.*$"
+        }
+      ]
+    },
+    "requests": {
+      "patterns": [
+        {
+          "name": "entity.name.function.ser",
+          "match": "\\b(request)\\s+([a-zA-Z][a-zA-Z0-9_]*)\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.control.ser"
+            },
+            "2": {
+              "name": "entity.name.function.ser"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "scopeName": "source.ser"
+}

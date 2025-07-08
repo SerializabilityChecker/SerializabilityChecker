@@ -1,0 +1,3 @@
+// Implementing nondeterminism using globals
+request randomize { while(1){ X := 1 - X; yield } }
+request read { y := X; yield; y + X }

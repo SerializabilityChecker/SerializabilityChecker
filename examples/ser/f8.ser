@@ -1,0 +1,16 @@
+
+request A {
+    if (FLAG == 0) { // x := FLAG 
+    	x := 0
+    } else {
+    	x := 1
+    }; 
+    if (?) {
+    	yield
+    } else { 0 } ; 
+    FLAG := 1 ;
+    x
+}
+
+// this is not serializable as {(A,0),(A,0)} cannot be returned in a serial execution
+

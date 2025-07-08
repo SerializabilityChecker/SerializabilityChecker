@@ -1,0 +1,40 @@
+{
+  "name": "ser-lang",
+  "displayName": "Ser Language",
+  "description": "Syntax highlighting for Ser language files",
+  "version": "0.0.2",
+  "publisher": "ser-project",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/user/ser"
+  },
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "ser",
+        "aliases": ["Ser", "ser"],
+        "extensions": [".ser"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ser",
+        "scopeName": "source.ser",
+        "path": "./syntaxes/ser.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.22.0"
+  }
+}

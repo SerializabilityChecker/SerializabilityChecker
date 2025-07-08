@@ -1,0 +1,17 @@
+request flip {
+	X := 1-X
+}
+
+request main {
+	i := 3 ; // takes hours for i=5, a few minutes for i=4, and a few seconds for i=3
+	while ( stop == 0 ) 
+	{
+		while (X == 0) { yield } ;
+		while (X == 1) { yield } ;
+		i := i-1 ;
+		if (i == 0) {
+			stop := 1
+		} else {0}
+	};
+	100
+}

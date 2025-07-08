@@ -1,0 +1,14 @@
+request foo {
+    b := 0;
+    y := 0;
+    while(y == 0 || y == 1 || y == 2) {
+        tmp := X;
+        yield;
+        if(tmp == X){ b := 1 }else{0}; // if we see X not changed, set b := 1
+        y := y + 1
+    };
+    b
+}
+
+request set0 { X := 0 }
+request set1 { X := 1 }

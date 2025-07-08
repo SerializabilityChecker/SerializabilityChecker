@@ -1,0 +1,1 @@
+request main { X := 1; yield; y := X; X := 0; y }

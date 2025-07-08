@@ -1,0 +1,20 @@
+\begin{table}[H]
+	\centering
+	\begin{tabular}{lrrrrrr}
+		\toprule
+		& \multicolumn{3}{c}{Average time (ms)} & \multicolumn{3}{c}{Median time (ms)} \\
+		\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+		Category
+		& \shortstack{certificate\\generation}
+		& \shortstack{certificate\\validation}
+		& total
+		& \shortstack{certificate\\generation}
+		& \shortstack{certificate\\validation}
+		& total \\
+		\midrule
+		Serializable      &   2273 &  23257 &  25531 &  1178 &  1300 &  2238 \\
+		Not serializable  &  42076 &    905 &  42980 &   773 &    78 &   830 \\
+		All               &  39613 &  13244 &  52858 &   797 &   151 &  2080 \\
+		\bottomrule
+	\end{tabular}
+\end{table}

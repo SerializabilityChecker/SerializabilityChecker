@@ -1,0 +1,113 @@
+request control {
+	if (?) {
+		// green policy: [WEST, switch 1] ---> [EAST, switch 2] ---> [out, switch 3] --->
+		G := 1 
+	}
+	else {
+		// red policy: <--- [out, switch 0] <--- [WEST, switch 1] <--- [EAST, switch 2]
+		G := 0 
+	};
+	G
+}
+
+
+
+request route_from_WEST {
+
+	done := 0 ; // boolean value indicating if the packet is still in the network
+	visited_east := 0 ; // boolean value indicating if the EAST switch was visited
+	current := 1 ; // current switch (WEST switch)
+	
+	while (done == 0) {
+		// arrived to egress switch
+		if  (current == 0){
+			done := 1
+		} else {
+			// arrived to switch 1 (WEST switch)
+			if (current == 1){
+				if (G == 1){ 
+					// green policy
+					current := 2
+				} else {
+					// red policy
+					current := 0
+				}
+			} else {
+				// arrived to switch 2 (EAST switch)
+				if (current == 2){
+					visited_east := 1 ;
+					if (G == 1){ 
+						// green policy
+						current := 3
+					} else {
+						// red policy
+						current := 1
+					}
+			
+				} else { 
+					// arrived to switch 3 (egress switch)
+					done := 1
+					}
+				}
+		};
+		yield
+	};
+	
+	current + current + visited_east // return a unique identifier of the pair (current_switch, visited_east) 
+	// if current=0 (left exit) and visited_east=1 then it cycles (in which case the return value is 2*0 + 1 = 1)
+	// legal serial executions are either returning 0 (in the case that current=0, and visited_east=0) 
+	// or 7 (in the case that current=3, and visited_east=1)
+}
+
+
+
+
+request route_from_EAST {
+
+	done := 0 ; // boolean value indicating if the packet is still in the network
+	visited_west := 0 ; // boolean value indicating if the WEST switch was visited
+	current := 2 ; // current switch (WEST switch)
+	
+	while (done == 0) {
+		// arrived to egress switch
+		if  (current == 0){
+			done := 1
+		} else {
+			// arrived to switch 1 (WEST switch)
+			if (current == 1){
+				visited_west := 1 ;
+				if (G == 1){ 
+					// green policy
+					current := 2
+				} else {
+					// red policy
+					current := 0
+				}
+			} else {
+				// arrived to switch 2 (EAST switch)
+				if (current == 2){
+					if (G == 1){ 
+						// green policy
+						current := 3
+					} else {
+						// red policy
+						current := 1
+					}
+			
+				} else { 
+					// arrived to switch 3 (egress switch)
+					done := 1
+					}
+				}
+		};
+		yield
+	};
+	
+	current + current + visited_west // return a unique identifier of the pair (current_switch, visited_west) 
+	// if current=3 (right exit) and visited_west=1 then it cycles (in which case the return value is 2*3 + 1 = 7)
+	// legal serial executions are either returning 1 (in the case that current=0, and visited_west=1) 
+	// or 6 (in the case that current=3, and visited_west=0)
+}
+
+
+

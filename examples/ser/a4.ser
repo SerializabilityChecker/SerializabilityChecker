@@ -1,0 +1,13 @@
+request login {
+  x := 1;
+  yield;
+  r := 42;
+  r
+}
+
+request logout {
+  y := 2;
+  yield;
+  r := 10;
+  r
+}

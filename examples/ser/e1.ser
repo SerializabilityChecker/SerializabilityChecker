@@ -1,0 +1,7 @@
+request foo { 
+    while(L==1){ yield };
+    L := 1;
+    X := 1; yield; y := X; X := 0; 
+    L := 0;
+    y
+}

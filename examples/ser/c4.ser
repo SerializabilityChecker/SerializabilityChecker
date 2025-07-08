@@ -1,0 +1,9 @@
+request incr {
+    while(X == 2) { yield };
+    X := X + 1
+}
+
+request decr {
+    while(X == 0) { yield };
+    X := X - 1
+}

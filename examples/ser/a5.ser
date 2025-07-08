@@ -1,0 +1,6 @@
+request receive { X := 1 }
+request process {
+    while(X == 0){ yield };
+    X := 2
+}
+request reset { X := 0 }

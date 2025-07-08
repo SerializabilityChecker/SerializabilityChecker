@@ -1,0 +1,11 @@
+request foo { 
+	if (?) {
+		0 
+	}
+	else {
+		X := 0; yield; y := X; X := 1; y
+	}
+}
+
+
+

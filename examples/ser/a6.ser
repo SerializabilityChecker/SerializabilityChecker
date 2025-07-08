@@ -1,0 +1,2 @@
+request foo { X := 1; yield; X := 0 }
+request bar { X }

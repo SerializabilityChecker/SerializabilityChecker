@@ -1,0 +1,51 @@
+request init {
+	if (X ==0){
+		N_1_ACTIVE := 1 ; // initialize node N1 to be active
+		N_2_ACTIVE := 1 ; // initialize node N2 to be active
+		X := 1
+	} else {0}
+}
+
+// a decentralized network in which at least one node needs to be active and monitor the network at any given moment
+// if the snapshot records two active nodes, a transaction can non-deterministically choose which node to turn to inactive
+
+request main {
+	while (X == 0){
+		yield
+	};
+	// take snapshot
+	if (N_1_ACTIVE == 1) {
+		n_1_active_snapshot := 1 
+	} else {
+		n_1_active_snapshot := 0 
+	};
+	if (N_2_ACTIVE == 1) {
+		n_2_active_snapshot := 1 
+	} else {
+		n_2_active_snapshot := 0 
+	};
+	yield; //snapshot taken
+	if (n_1_active_snapshot == 1) {
+		if (n_2_active_snapshot == 1) {
+			
+			// if both monitor nodes are active in the snapshot --- choose whether to inactivate
+			if (?) {
+				
+				// if chose to inactivate --- randomly pick which of them to inactivate
+				if (?) {
+					N_1_ACTIVE := 0
+				} else {
+					N_2_ACTIVE := 0
+				}
+			
+			} else {0} 
+		
+		} else {0} // do nothing
+	
+	} else {0}; // do nothing
+	
+	N_1_ACTIVE + N_2_ACTIVE // return the total active monitor nodes (only in non-serializable runs this can be 0!)
+}
+	
+
+

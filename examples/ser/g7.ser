@@ -1,0 +1,46 @@
+request main {
+    if (T == 0) {
+        t := 0;
+        T := 1;
+        if (?) {
+    		s := 0; // originally from switch 0 (= switch h_in)
+    		if (X == 0) {
+    			X := 1;
+    			c := 1 // send to switch 1 (h_out)
+		} else { // X=1
+			c := 1 // send to switch 1 (h_out)
+    		}
+    	} else {
+	    	s := 1; // originally from switch 1 (= switch h_out)
+	    	if (X == 0) {
+	    		c := 2 // drop packet
+	    	} else { // X=1
+			c := 0 // send to switch 0 (h_in) 
+	    	}
+	}  
+    } else {
+	if (T == 1) {
+	    t := 1;
+	    T := 2;
+	if (?) {
+    		s := 0; // originally from switch 0 (= switch h_in)
+    		if (X == 0) {
+    			X := 1;
+    			c := 1 // send to switch 1 (h_out)
+		} else { // X=1
+			c := 1 // send to switch 1 (h_out)
+    		}
+    	} else {
+	    	s := 1; // originally from switch 1 (= switch h_out)
+	    	if (X == 0) {
+	    		c := 2 // drop packet
+	    	} else { // X=1 
+			c := 0 // send to switch 0 (h_in) 
+	    	}
+	} 
+	} else {
+        t := 2 // T=2 and above
+   	}
+    };
+        s + t + t + c + c + c + c + c + c + c + c // return a unique value indicating the combination t (0/1/2), s (0/1), and c (0/1/2) 
+}

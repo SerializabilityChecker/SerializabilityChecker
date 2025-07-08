@@ -1,0 +1,86 @@
+request init {
+    if (X == 0) {
+    	X := 1;    	
+    	A := 100;
+    	B := 50
+    } else {0} // empty
+}
+
+request transfer {
+    while (X == 0) {
+    	yield
+	};
+    if (A == 100) {
+        A := 50;
+        yield;
+        if (B == 100) {
+            B := 150
+        } else {   
+            if (B == 50) {
+                B := 100
+            } else {0} // empty
+        }
+    } else {
+        if (A == 150) {
+            A := 100;
+            yield;
+            if (B == 100) {
+                B := 150
+            } else {
+                if (B == 50) {
+                    B := 100
+                } else {0} // empty
+            }
+        } else {
+            if (A == 200) {
+                A := 150;
+                yield;
+                if (B == 100) {
+                    B := 150
+                } else {
+                    if (B == 50) {
+                        B := 100
+                    } else {0} // empty
+                }
+            } else {0} // empty
+        }
+    };
+    A + B // a non-serializable execution includes (A+B)%150 != 0
+}
+
+request interest {
+    while (X == 0) {
+    	yield
+	};
+    if (A == 100) {
+        A := 200;
+        yield;
+        if (B == 100) {
+            B := 200
+        }
+        else {
+            if (B == 50) {
+                B := 100
+            }
+            else {0} // empty
+        }
+    }
+    else {
+        if (A == 50) {
+            A := 100;
+            yield;
+            if (B == 100) {
+                B := 200
+            }
+            else {
+                if (B == 50) {
+                    B := 100
+                }
+                else {0} // empty
+            }
+        }
+        else {0} // empty
+    };
+    A + B // a non-serializable execution includes (A+B)%150 != 0
+}
+
